@@ -2,9 +2,23 @@
 
 # History
 
+### 2022-05-13
+
+나의 very 처음 리액트
+
+### 2022-06-16 ~ 2022-06-17
+
+[React tutorial 따라하기 (웹툰서비스 만들기)](https://ibrahimovic.tistory.com/32?category=711523)
+
 ### 2022-06-22
 
 천방지축 어리둥절 빙글빙글 돌아가는 짱구의 하루
+
+### `Hoonies code review`
+
+후니의 친절한 리액트 가르침에 나는 언제나처럼 spoiled 되었다.
+
+
 
 
 # Getting Started with Create React App

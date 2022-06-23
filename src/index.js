@@ -6,10 +6,16 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );
+
+/** Hoonie의 친절한 코딩 교실 */
+/* ************************************************** 
+As-is : <React.StrictMode>
+          <App />
+        </React.StrictMode>
+StrictMode 사용시에는 개발 도중 발생하는 문제를 감지하기 위해서 렌더링이 2번됨 
+************************************************** */
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

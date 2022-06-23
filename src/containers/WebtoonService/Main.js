@@ -8,30 +8,16 @@ import logo from '../../assets/images/logo.svg';
 import axios from 'axios';
 
 function Main(props) {
-  const [day, setDay] = useState('mon');
+  const [day, setDay] = useState('');
   const [webtoons, setWebtoons] = useState([]);
 
   const apiUrl = 'dummy/webtoon_list.json';
 
   useEffect(() => {
     console.log('@  useEffect  @');
-    
-    /** 1. axios로 가져오기 */
-    // axios
-    //   .get(apiUrl)
-    //   .then((response) => setWebtoons(response.data.webtoonList))
-    //   .catch(function(error) {console.log('실패');});
-    
-    /** 2. fetch로 가져오기 */
-    fetch(apiUrl)
-    .then((res) => res.json())
-    .then((data) => {setWebtoons(data.webtoonList); getQuery();})
-    /** Hoonie의 친절한 코딩 교실
-      *
-      * getQuery함수를 useEffect(()=>{},[])에서 실행하여 query를 가져오는걸 페이지가 오픈되어 최초 랜더링이 될때
-      * 한번만 요일을 가지고 오는 것이 돌아 가도록 변경
-      */
-  }, []);
+    getQuery();
+    getList();
+  }, [day]); //day 값이 변경될 때마다 실행
 
   /** Hoonie의 친절한 코딩 교실 */
   const getQuery = () => {
@@ -42,8 +28,9 @@ function Main(props) {
     console.log('query : ' + query);
     console.log('day   : ' + SearchDay);
     console.log('<<<<<<<<<<<<<<<<<<<<<<<<<');
+
     if (SearchDay != "") {
-      setDay(SearchDay)
+      setDay(SearchDay);
 
       /** Hoonie의 친절한 코딩 교실
         *
@@ -57,6 +44,38 @@ function Main(props) {
         * 추후에 Date를 사용해서 페이지가 열린 날에 해당하는 요일을 집어 넣는 로직으로 할꺼라 보여짐
         */
     }
+  }
+
+  const getList = () => {
+    /** 1. axios로 가져오기 */
+    // axios
+    //   .get(apiUrl)
+    //   .then((response) => setWebtoons(response.data.webtoonList))
+    //   .catch(function(error) {console.log('실패');});
+    
+    /** 2. fetch로 가져오기 */
+    // fetch(apiUrl)
+    // .then((res) => res.json())
+    // .then((data) => {setWebtoons(data.webtoonList);})
+    /** Hoonie의 친절한 코딩 교실
+      *
+      * getQuery함수를 useEffect(()=>{},[])에서 실행하여 query를 가져오는걸 페이지가 오픈되어 최초 랜더링이 될때
+      * 한번만 요일을 가지고 오는 것이 돌아 가도록 변경
+      */
+    
+
+    //메인 화면(day 파라미터 null)일 때 전체 리스트 불러오기
+    //요일 클릭시 요일별 리스트 불러오기
+    if (day == '' || day == null) {
+      fetch(apiUrl)
+        .then((res) => res.json())
+        .then((data) => {setWebtoons(data.webtoonList)});
+    } else {
+      fetch(apiUrl)
+        .then((res) => res.json())
+        .then((data) => {setWebtoons(data.webtoonList.filter(webtoon => (webtoon.day === day)))});
+    }
+    
   }
 
   /** Hoonie의 친절한 코딩 교실

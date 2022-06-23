@@ -12,7 +12,7 @@
 
 ### 2022-06-22
 
-천방지축 어리둥절 빙글빙글 돌아가는 짱구의 하루
+천방지축 어리둥절 빙글빙글 돌아가는 짱구의 하루\
 [클래스형에서 함수형으로 바꾸기](https://nimblewebdeveloper.com/blog/convert-react-class-to-function-component) 도전 - Main.js 수정
 
 **`Hoonies code review`**
@@ -23,6 +23,31 @@
 
 [클래스형에서 함수형으로 바꾸기](https://velog.io/@lemon-ginger/Class-Component%EC%97%90%EC%84%9C-Function-Component%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0) 도전 - Viewer.js, WebtoonHome.js 수정
 
+
+
+<br/><br/><br/><br/>
+
+
+
+# Plan
+
+
+* 컴포넌트
+```
+1. 더보기(?)
+2. 뒤로가기
+3. 슬라이딩
+4. top으로
+```
+
+* 기능
+```
+1. 회원가입
+```
+
+
+
+<br/><br/><br/><br/>
 
 
 # Getting Started with Create React App

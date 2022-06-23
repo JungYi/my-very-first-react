@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import Gnb from '../../components/Gnb';
 import Header from '../../components/Header';
@@ -7,94 +7,74 @@ import Header from '../../components/Header';
 import WebtoonInfo from '../../components/WebtoonInfo';
 import EpisodeList from '../../components/EpisodeList';
 
-class WebtoonHome extends Component {
-  constructor(props) {
-    super(props);
+function WebtoonHome(props) {
+  const [webtoonId, setWebtoonId] = useState(parseInt(props.match.params.webtoonId, 10));
+  const [webtoon, setWebtoon] = useState({}); //Object {}, 배열 []
+  const [episodeList, setEpisodeList] = useState([]);
 
-    this.state = {
-      webtoonId : parseInt(props.match.params.webtoonId, 10),
-      webtoon : {},
-      episodeList : []
-    };
-  }
-
-  componentDidMount() {
-    this._getWebtoon();
-    this._getEpisodeList();
-
-    
-  }
-
-
-  _getWebtoon() {
+  useEffect(() => {
+    getWebtoon();
+    getEpisodeList();
+  }, []);
+  
+  function getWebtoon() {
     const apiUrl = '/dummy/webtoon_detail.json';
 
-    var test = this.state.webtoonId;
-    console.log(test);
-
-    
     axios.get(apiUrl)
       .then(data => {
-        this.setState({
-          webtoon : data.data.webtoons.find(w => (
-            w.id === this.state.webtoonId
+        /** 1. setState 사용하기 */
+        // this.setState({
+        //   webtoon : data.data.webtoons.find(w => (
+        //     w.id === this.state.webtoonId
+        //   ))
+        // });
+
+        /** 2. useState 사용하기 */
+        setWebtoon(
+          data.data.webtoons.find(w => (
+            w.id === webtoonId
           ))
-        });
+        );
       })
       .catch(error => {
         console.error(error);
       });
-  }
+  };
 
-  _getEpisodeList() {
+  function getEpisodeList() {
     const apiUrl = '/dummy/episode_list.json';
 
-    axios.get(apiUrl)
-      .then(data => {
-        this.setState({
-          episodeList : data.data.webtoonEpisodes.filter(episode => (
-            episode.webtoonId === this.state.webtoonId
-          ))
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
+    fetch(apiUrl)
+    .then((res) => res.json())
+    .then((data) => {
+      setEpisodeList(
+        data.webtoonEpisodes.filter(episode => (
+          episode.webtoonId === webtoonId
+        ))
+      )
+    })
+  };
 
+  return (
+    <div>
+      <Header />
+      <Gnb />
 
+      { webtoon.id ? (
+        <WebtoonInfo webtoon={webtoon} />
+      ) : (
+        <span>Loading. . .111</span>
+      )}
+      
+      { episodeList.length > 0 ? (
+        <EpisodeList episodes={episodeList} />
+      ) : (
+        <span>Loading. . .222</span>
+      )}
 
-
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <Gnb />
-        WebtoonHome
-
-
-
-        { this.state.webtoon.id ? (
-          <WebtoonInfo webtoon={this.state.webtoon} />
-        ) : (
-          <span>Loading. . .111</span>
-        )}
-        
-        { this.state.episodeList.length > 0 ? (
-          <EpisodeList episodes={this.state.episodeList} />
-        ) : (
-          <span>Loading. . .222</span>
-        )}
-
-
-
-
-
-        <Footer />
-      </div>
-    )
-  }
+      <Footer />
+    </div>
+  );
 }
 
 export default WebtoonHome;

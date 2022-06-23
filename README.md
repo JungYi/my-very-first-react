@@ -13,11 +13,15 @@
 ### 2022-06-22
 
 천방지축 어리둥절 빙글빙글 돌아가는 짱구의 하루
+[클래스형에서 함수형으로 바꾸기](https://nimblewebdeveloper.com/blog/convert-react-class-to-function-component) 도전 - Main.js 수정
 
-### `Hoonies code review`
+**`Hoonies code review`**
 
 후니의 친절한 리액트 가르침에 나는 언제나처럼 spoiled 되었다.
 
+### 2022-06-23
+
+[클래스형에서 함수형으로 바꾸기](https://velog.io/@lemon-ginger/Class-Component%EC%97%90%EC%84%9C-Function-Component%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0) 도전 - Viewer.js, WebtoonHome.js 수정
 
 
 

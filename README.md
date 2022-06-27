@@ -21,8 +21,16 @@
 
 ### 2022-06-23
 
-[클래스형에서 함수형으로 바꾸기](https://velog.io/@lemon-ginger/Class-Component%EC%97%90%EC%84%9C-Function-Component%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0) 도전 - Viewer.js, WebtoonHome.js 수정
+[클래스형에서 함수형으로 바꾸기](https://velog.io/@lemon-ginger/Class-Component%EC%97%90%EC%84%9C-Function-Component%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0) 도전 - Viewer.js, WebtoonHome.js 수정\
+메인 화면일 때 전체 리스트 불러오고, 요일 클릭시 요일별 리스트 불러오기
 
+### 2022-06-27
+
+[로그인 Form 만들기](https://backend-intro.vlpt.us/5/06.html) 따라하기
+```
+npm i styled-components
+yarn add styled-components open-color
+```
 
 
 <br/><br/><br/><br/>
@@ -43,6 +51,8 @@
 * 기능
 ```
 1. 회원가입
+2. 장바구니
+3. CRUD
 ```
 
 

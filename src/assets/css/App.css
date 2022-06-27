@@ -62,7 +62,9 @@ address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
 .show {display:block}
 .hide {display:none}
 
-.header {padding:10px 0;font-size:20px;background-color:#3d414c;text-align:center;color:#fff}
+.header {padding:10px 10px 10px 10px;font-size:20px;background-color:#3d414c;text-align:center;color:#fff}
+.header .main {display:inline;padding:0 100px 0 100px;}
+.header .login {display:inline;}
 .footer {padding:10px 0;border-top:1px solid #d9d9d9;font-size:11px;font-size:12px;background-color:#f1f1f1;text-align:center;color:#888}
 .gnb {overflow:hidden;background-color:#be3f2f}
 .gnb li {float:left;width:33.3%}

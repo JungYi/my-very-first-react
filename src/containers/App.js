@@ -6,6 +6,7 @@ import '../assets/css/App.css';
 import Main from "./WebtoonService/Main";
 import Viewer from "./WebtoonService/Viewer";
 import WebtoonHome from "./WebtoonService/WebtoonHome";
+import Login from "./User/Login";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route exact path="/" component={Main} />
         <Route path="/webtoon/:webtoonId" component={WebtoonHome} />
         <Route path="/viewer/:episodeId" component={Viewer} />
+
+        <Route path="/login" component={Login} />
       </div>
     </Router>
   );

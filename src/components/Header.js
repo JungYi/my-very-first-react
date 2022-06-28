@@ -9,7 +9,7 @@ const Header = () => {
                 <a href="/" title="홈페이지 메인으로 이동" id="logo" data-hveid="8">Webtton<img src={logo} className="App-logo" alt="logo" /></a>
             </div>
             <div className='login'>
-                <a href="/login" className='' target="_top">로그인</a>
+            <a href="/login" className='' target="_top" sytle={{color: "white"}}>로그인</a>
             </div>
         </div>
     );

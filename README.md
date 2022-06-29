@@ -32,6 +32,16 @@ npm i styled-components
 yarn add styled-components open-color
 ```
 
+### 2022-06-28
+
+버튼 컴포넌트 만들기
+
+### 2022-06-29
+
+불러온 전체 리스트에서 설정한 개수만큼 보여주기\
+[React로 무한 스크롤 구현하기](https://slog.website/post/8), [React로 타임라인 만들기 (+ 더보기 버튼)](https://leego.tistory.com/entry/React%EB%A1%9C-%ED%83%80%EC%9E%84%EB%9D%BC%EC%9D%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%8D%94%EB%B3%B4%EA%B8%B0-%EB%B2%84%ED%8A%BC) 참고
+
+
 
 <br/><br/><br/><br/>
 

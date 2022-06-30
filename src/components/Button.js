@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Button = (props) => {
-    console.log('------------??버튼---------');
+    console.log('   ! button component !   ');
 
     return (
         <button className="" 

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Footer from '../../components/Footer';
 import Gnb from '../../components/Gnb';
 import Header from '../../components/Header';
+import Button from '../../components/Button';
 import WebtoonList from '../../components/WebtoonList';
 
 import logo from '../../assets/images/logo.svg';
 import axios from 'axios';
+
 
 function Main(props) {
   const [day, setDay] = useState('');
@@ -13,21 +15,151 @@ function Main(props) {
 
   const apiUrl = 'dummy/webtoon_list.json';
 
+  const [page, setPage] = useState(1);
+  const [limitedItems, setlimitedItems] = useState([]);
+  const [concatItems, setConcatItems] = useState([]);
+  const [pageSize, setPageSize] = useState(5);
+
+  let [pageIdx, setPageIdx] = useState(0);
+
+
   useEffect(() => {
-    console.log('@  useEffect  @');
-    getQuery();
-    getList();
+    console.log('@  useEffect  1 @');
+    // getQuery();
+    // getList();
   }, [day]); //day 값이 변경될 때마다 실행
+
+  useEffect(() => {
+    console.log('@  useEffect  2 @');
+    // getItems();
+  }, [getItems]);
+
+
+  /** 공부하기 : useCallback, async, prevState */
+  const getItems = useCallback(async () => {
+    console.log('........................... function getItems');
+    console.log('      page : ' + page);
+
+    await axios
+      .get(apiUrl+`?page=${page}`)
+      .then((response) => setWebtoons(prevState => [...prevState, response.data.webtoonList]))
+      .catch(function(error) {console.log('실패');});
+    
+    console.log('      webtoons : ');
+    console.log(webtoons);
+
+  }, []);
+
+
+
+  
+  /** Button 더보기1 */
+  const getListMore = () => {
+    if (pageIdx > webtoons.length/pageSize) {
+      alert('no data. pageIdx : '+pageIdx);
+      return;
+    }
+
+    console.log('........................... function getListMore');
+    const start = pageIdx*pageSize;
+    const end = start + pageSize;
+    console.log('      start : ' + start);
+    console.log('      end : ' + end);
+
+    axios
+      .get(apiUrl+`?page=${page}`)
+      .then((response) => {
+        setWebtoons([...webtoons, ...response.data.webtoonList.slice(start,end)]);
+        setPageIdx(pageIdx + 1);
+      })
+      .catch(function(error) {console.log('실패');});
+    
+    console.log('      webtoons : ');
+    console.log(webtoons);
+  }
+
+
+  /** Button 더보기2 */
+  function loadMore(params) {
+    if (page > Math.ceil(webtoons.length/pageSize)) {
+      alert('no data. page : '+page);
+      return;
+    }
+    
+    console.log('........................... function loadMore');
+    console.log(`hi there~~~~~~${params}~~~~~`);
+    console.log('      page : ' + page);
+    console.log('      webtoons : ');
+    console.log(webtoons);
+    console.log('      limitedItems : ');
+    console.log(limitedItems);
+    
+    /** 1. slice로 개수 제한 */
+    // showLimitedItems(webtoons, 0, pageSize);
+
+    /** 2. concat로 배열 합치기 */
+    showConcatItems(webtoons, 0, pageSize);
+
+    console.log('      page : ' + page);
+    console.log('      webtoons.length : ' + webtoons.length/pageSize);
+    setPage(prevState => prevState + 1);
+  }
+
+  /** 1. slice로 개수 제한 */
+  function showLimitedItems(list, start = 0, count) {
+    console.log('........................... function showLimitedItems');
+    console.log('      list : ');
+    console.log(list);
+    const end = start + page*count;
+    console.log('      start : ' + start);
+    console.log('      end : ' + end);
+
+    setlimitedItems(list.slice(start, end));
+
+    console.log('      limitedItems : ');
+    console.log(limitedItems);
+    console.log('      list.slice : ');
+    console.log(list.slice(start, end));
+    console.log('      list.length : ' + list.length);
+    // return {list: list.slice(start, end), nextId: list.length < end ? null : end};
+  }
+
+  /** 2. concat로 배열 합치기 */
+  function showConcatItems(list, start = 0, count) {
+    console.log('........................... function showConcatItems');
+    console.log('      list : ');
+    console.log(list);
+
+    start = (page-1)*count;
+    const end = page*count;
+    console.log('      start : ' + start);
+    console.log('      end : ' + end);
+
+    if (start > list.length) {
+      console.log('============return; start > list.length');
+      return;
+    }
+
+    console.log('      list.slice : ');
+    console.log(list.slice(start, end));
+
+    setConcatItems(concatItems.concat(list.slice(start, end)));
+    // setConcatItems(concatItems.push(list.slice(start, end)));
+
+    console.log('      concatItems : ');
+    console.log(concatItems);
+  }
+
+
 
   /** Hoonie의 친절한 코딩 교실 */
   const getQuery = () => {
+    console.log('........................... function getQuery');
     const query = new URLSearchParams(props.location.search);
     const SearchDay = query.get('day');
     
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>');
-    console.log('query : ' + query);
-    console.log('day   : ' + SearchDay);
-    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<');
+    console.log('      query : ' + query);
+    console.log('      day   : ' + SearchDay);
 
     if (SearchDay != "") {
       setDay(SearchDay);
@@ -47,6 +179,7 @@ function Main(props) {
   }
 
   const getList = () => {
+    console.log('........................... function getList');
     /** 1. axios로 가져오기 */
     // axios
     //   .get(apiUrl)
@@ -86,14 +219,25 @@ function Main(props) {
     <div>
       <Header />
       <Gnb day={day}/>
-      {webtoons.length > 0 ?
-        <WebtoonList list={webtoons} />
-        :
-        <>
-          Main
-          <img src={logo} className="App-logo" alt="logo" />
-        </>
-      }
+
+      <div><Button id={"hiid"} value={'더보기1'} onClick={getListMore} /></div>
+      <div><Button id={"hiid"} value={'더보기2'} onClick={() => loadMore("hohoh")} /></div>
+      {/* <div><Button id={"hiid"} value={'더보기3'} onClick={getItems} /></div> */}
+      <div>
+        
+        {limitedItems.length > 0 ? <WebtoonList list={limitedItems} /> : <h1>no limitedItems</h1>}
+        {concatItems.length > 0 ? <WebtoonList list={concatItems} /> : <h1>no concatItems</h1>}
+        
+        {webtoons.length > 0 ?
+          <WebtoonList list={webtoons} />
+          :
+          <>
+            Main
+            <img src={logo} className="App-logo" alt="logo" />
+          </>
+        }
+      </div>
+
       <Footer />
     </div>
   )

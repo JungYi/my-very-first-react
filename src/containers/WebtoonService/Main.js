@@ -25,19 +25,19 @@ function Main(props) {
 
   useEffect(() => {
     console.log('@  useEffect  1 @');
-    // getQuery();
-    // getList();
+    getQuery();
+    getList();
   }, [day]); //day 값이 변경될 때마다 실행
 
   useEffect(() => {
     console.log('@  useEffect  2 @');
-    // getItems();
-  }, [getItems]);
+    // fn_getItems();
+  }, [fn_getItems]);
 
 
   /** 공부하기 : useCallback, async, prevState */
-  const getItems = useCallback(async () => {
-    console.log('........................... function getItems');
+  const fn_getItems = useCallback(async () => {
+    console.log('........................... function fn_getItems');
     console.log('      page : ' + page);
 
     await axios
@@ -52,15 +52,15 @@ function Main(props) {
 
 
 
-  
+
   /** Button 더보기1 */
-  const getListMore = () => {
+  const fn_getListMore = () => {
     if (pageIdx > webtoons.length/pageSize) {
       alert('no data. pageIdx : '+pageIdx);
       return;
     }
 
-    console.log('........................... function getListMore');
+    console.log('........................... function fn_getListMore');
     const start = pageIdx*pageSize;
     const end = start + pageSize;
     console.log('      start : ' + start);
@@ -80,13 +80,13 @@ function Main(props) {
 
 
   /** Button 더보기2 */
-  function loadMore(params) {
+  function fn_loadMore(params) {
     if (page > Math.ceil(webtoons.length/pageSize)) {
       alert('no data. page : '+page);
       return;
     }
     
-    console.log('........................... function loadMore');
+    console.log('........................... function fn_loadMore');
     console.log(`hi there~~~~~~${params}~~~~~`);
     console.log('      page : ' + page);
     console.log('      webtoons : ');
@@ -200,9 +200,9 @@ function Main(props) {
     //메인 화면(day 파라미터 null)일 때 전체 리스트 불러오기
     //요일 클릭시 요일별 리스트 불러오기
     if (day == '' || day == null) {
-      fetch(apiUrl)
-        .then((res) => res.json())
-        .then((data) => {setWebtoons(data.webtoonList)});
+      // fetch(apiUrl)
+      //   .then((res) => res.json())
+      //   .then((data) => {setWebtoons(data.webtoonList)});
     } else {
       fetch(apiUrl)
         .then((res) => res.json())
@@ -220,9 +220,9 @@ function Main(props) {
       <Header />
       <Gnb day={day}/>
 
-      <div><Button id={"hiid"} value={'더보기1'} onClick={getListMore} /></div>
-      <div><Button id={"hiid"} value={'더보기2'} onClick={() => loadMore("hohoh")} /></div>
-      {/* <div><Button id={"hiid"} value={'더보기3'} onClick={getItems} /></div> */}
+      <div><Button id={"hiid"} value={'더보기1'} onClick={fn_getListMore} /></div>
+      <div><Button id={"hiid"} value={'더보기2'} onClick={() => fn_loadMore("hohoh")} /></div>
+      {/* <div><Button id={"hiid"} value={'더보기3'} onClick={fn_getItems} /></div> */}
       <div>
         
         {limitedItems.length > 0 ? <WebtoonList list={limitedItems} /> : <h1>no limitedItems</h1>}

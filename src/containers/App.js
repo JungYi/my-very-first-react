@@ -7,6 +7,7 @@ import Main from "./WebtoonService/Main";
 import Viewer from "./WebtoonService/Viewer";
 import WebtoonHome from "./WebtoonService/WebtoonHome";
 import Login from "./User/Login";
+import UserMain from "./User/UserMain";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/viewer/:episodeId" component={Viewer} />
 
         <Route path="/login" component={Login} />
+        <Route path="/user" component={UserMain} />
       </div>
     </Router>
   );

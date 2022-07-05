@@ -66,11 +66,11 @@ address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
 .header .main {display:inline;padding:0 100px 0 100px;}
 .header .login {padding:20px 0 0 0; display:inline; float: right;}
 .footer {padding:10px 0;border-top:1px solid #d9d9d9;font-size:11px;font-size:12px;background-color:#f1f1f1;text-align:center;color:#888}
-.gnb {overflow:hidden;background-color:#be3f2f}
+.gnb {overflow:hidden;background-color:#872c20}
 .gnb li {float:left;width:33.3%}
 .gnb li:nth-child(2) {width:33.4%}
 .gnb .tab_day {display:block;padding:6px 0;text-align:center;color:#fff}
-.gnb .tab_day.on {background-color:#8e2f23}
+.gnb .tab_day.on {background-color:#f6a89e}
 
 .list_webtoon li {border-top:1px solid #ccc}
 .list_webtoon .link_webtoon {display:block;overflow:hidden}
